@@ -1,3 +1,3 @@
 <template>
-  General
+  <div>General</div>
 </template>

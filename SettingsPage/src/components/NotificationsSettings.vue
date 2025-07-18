@@ -1,3 +1,3 @@
 <template>
-  Notifications
+  <div>Notifications</div>
 </template>

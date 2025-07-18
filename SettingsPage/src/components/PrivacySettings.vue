@@ -1,3 +1,3 @@
 <template>
-  Privacy
+  <div>Privacy</div>
 </template>
