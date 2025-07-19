@@ -17,8 +17,34 @@ const general = ref<GeneralSettings>({
   country: 'USA',
 });
 
+interface NotificationsSettings{
+  email:boolean,
+  sms: boolean,
+}
+
+const notifications = ref<NotificationsSettings>({
+  email:false,
+  sms:false,
+});
+
+
+type Visibility ='public'|'private';
+
+interface PrivacySettings{
+  visibility: Visibility,
+  searchEngineIndexing: boolean,
+}
+
+const privacy = ref<PrivacySettings>({
+  visibility:'public',
+  searchEngineIndexing:true,
+})
+
+
 export function useSettings(){
   return{
-    general
+    general,
+    notifications,
+    privacy,
   };
 }
