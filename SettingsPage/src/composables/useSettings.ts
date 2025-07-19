@@ -1,5 +1,4 @@
-import GeneralSettings from "@/components/GeneralSettings.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 interface GeneralSettings{
   username: string,
@@ -9,13 +8,21 @@ interface GeneralSettings{
   country: string,
 }
 
-const general = ref<GeneralSettings>({
-  username: '',
-  email: '',
-  about: '',
-  gender: 'male',
-  country: 'USA',
-});
+const general = ref<GeneralSettings>( //transformed into IIFE
+  (()=>{
+    const stored = localStorage.getItem('general');
+
+    return stored !== null? JSON.parse(stored):{
+      username: '',
+      email: '',
+      about: '',
+      gender: 'male',
+      country: 'USA',
+    };
+  })()
+);
+
+watch(general, (value)=> localStorage.setItem('general', JSON.stringify(value)), {deep: true});
 
 interface NotificationsSettings{
   email:boolean,
