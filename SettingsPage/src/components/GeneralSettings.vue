@@ -8,28 +8,28 @@
         <label>
           Username
         </label>
-        <input type="text"/>
+        <input type="text" v-model="general.username"/>
       </div>
       <div>
         <label>
           Email
         </label>
-        <input type="email"/>
+        <input type="email" v-model="general.email"/>
       </div>
 
       <div>
         <label>
           About Me
         </label>
-        <textarea></textarea>
+        <textarea v-model="general.about"></textarea>
       </div>
 
       <div>
         <label>Gender</label>
         <div class="flex gap-4">
-          <label><input type="radio" name="gender" value="male" /> Male</label>
-          <label><input type="radio" name="gender" value="female" /> Female</label>
-          <label><input type="radio" name="gender" value="other" /> Other</label>
+          <label><input type="radio" name="gender" value="male" v-model="general.gender"/> Male</label>
+          <label><input type="radio" name="gender" value="female" v-model="general.gender"/> Female</label>
+          <label><input type="radio" name="gender" value="other" v-model="general.gender" /> Other</label>
         </div>
       </div>
 
@@ -37,7 +37,7 @@
         <label>
           Country
         </label>
-        <select>
+        <select v-model="general.country">
           <option>UK</option>
           <option>USA</option>
           <option>Canada</option>
@@ -52,3 +52,11 @@
     </form>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { useSettings } from '@/composables/useSettings';
+import { ref } from 'vue';
+
+const{general} = useSettings();
+const thisWillawaysBeZero = ref(0);
+</script>
