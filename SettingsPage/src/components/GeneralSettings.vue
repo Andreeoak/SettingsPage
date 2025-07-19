@@ -45,7 +45,7 @@
         </select>
       </div>
 
-      <button type="submit" class="btn-primary">
+      <button  type="submit" class="btn-primary mt-8">
         Save
       </button>
 
@@ -55,8 +55,6 @@
 
 <script lang="ts" setup>
 import { useSettings } from '@/composables/useSettings';
-import { ref } from 'vue';
 
 const{general} = useSettings();
-const thisWillawaysBeZero = ref(0);
 </script>
