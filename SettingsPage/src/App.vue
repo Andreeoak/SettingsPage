@@ -9,9 +9,9 @@
 
       </ul>
     </nav>
-    <Transition mode="out-in" name="fade">
+    <FadeTransition>
       <component :is="currentTabComponent"/>
-    </Transition>
+    </FadeTransition>
   </main>
 </template>
 
@@ -24,6 +24,7 @@ import {computed, ref} from 'vue';
 import GeneralSettings from '@/components/GeneralSettings.vue';
 import NotificationsSettings from '@/components/NotificationsSettings.vue';
 import PrivacySettings from '@/components/PrivacySettings.vue';
+import FadeTransition from '@/components/FadeTransition.vue';
 
   const tabs: Tab[] =[
     {
@@ -48,17 +49,5 @@ import PrivacySettings from '@/components/PrivacySettings.vue';
   const currentTabComponent = computed(()=>tabs.find(tab=>tab.key===currentTab.value)?.component);
 </script>
 
-<style scoped>
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
 
 
