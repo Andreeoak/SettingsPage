@@ -61,6 +61,6 @@ const {addNotifications} = useNotifications();
 const{general} = useSettings();
 
 const save = ()=>{
-  addNotifications('General settings were changed successfully!')
+  addNotifications('General settings updated successfully!')
 }
 </script>

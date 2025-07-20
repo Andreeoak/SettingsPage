@@ -4,7 +4,7 @@
         Privacy
     </h2>
     <div>
-      <form class="space-y-4 mx-auto">
+      <form class="space-y-4 mx-auto" @submit.prevent="save">
         <div>
           <label class="mb-2.5">Visibility</label>
           <select v-model="privacy.visibility">
@@ -32,6 +32,13 @@
 
 <script lang="ts" setup>
 import { useSettings } from '@/composables/useSettings';
+import { useNotifications } from '@/composables/useNotifications';
+
+const {addNotifications} = useNotifications()
+
+const save = ()=> {
+  addNotifications("Privacy settings updated succesfully!")
+}
 const {privacy} = useSettings();
 
 </script>

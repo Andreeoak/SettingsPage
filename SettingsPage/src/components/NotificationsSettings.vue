@@ -3,7 +3,7 @@
     <h2 class="text-2xl mb-4">
       Notifications
     </h2>
-    <form class="space-y-4">
+    <form class="space-y-4" @submit.prevent="save">
       <div class="flex items-center gap-2">
         <label>Email notifications</label>
         <input type="checkbox" v-model="notifications.email">
@@ -22,6 +22,14 @@
 
 <script lang="ts" setup>
 import { useSettings } from '@/composables/useSettings';
+import { useNotifications } from '@/composables/useNotifications';
+
+
+const {addNotifications} = useNotifications();
+
+const save = () => {
+  addNotifications("Notifications settings updated successfully!")
+}
 
 const {notifications} = useSettings();
 </script>

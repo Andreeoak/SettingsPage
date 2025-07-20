@@ -19,7 +19,7 @@ const addNotifications = (message:string)=>{
     message
   })
 
-  setTimeout(()=>removeNotification(id), 5000);
+  setTimeout(()=>removeNotification(id), 2000);
 }
 
 
