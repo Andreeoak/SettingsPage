@@ -23,6 +23,11 @@ const init = <T extends SettingsKey>(key:T, defaults:SettingsMap[T]) =>{
   return stored !== null? JSON.parse(stored):defaults;
 };
 
+const watcher = <T extends SettingsKey>(key:T) =>
+  (value:SettingsMap[T]) => {
+    localStorage.setItem(key, JSON.stringify(value))
+  }
+
 const general = ref<GeneralSettings>( //transformed into IIFE
     init("general", {
       username: '',
@@ -33,7 +38,7 @@ const general = ref<GeneralSettings>( //transformed into IIFE
     })
 );
 
-watch(general, (value)=> localStorage.setItem('general', JSON.stringify(value)), {deep: true});
+watch(general, watcher('general'),  {deep :true});
 
 interface NotificationsSettings{
   email:boolean,
@@ -47,6 +52,7 @@ const notifications = ref<NotificationsSettings>(
   })
 );
 
+watch(notifications, watcher('notifications'),  {deep :true});
 
 type Visibility ='public'|'private';
 
@@ -61,6 +67,8 @@ const privacy = ref<PrivacySettings>(
     searchEngineIndexing:true,
   })
 );
+
+watch(privacy, watcher('privacy'),  {deep :true});
 
 
 export function useSettings(){
