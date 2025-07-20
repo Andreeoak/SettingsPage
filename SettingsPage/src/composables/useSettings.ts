@@ -1,5 +1,14 @@
 import { ref, watch } from "vue";
 
+interface SettingsMap{
+  general: GeneralSettings,
+  notifications: NotificationsSettings,
+  privacy: PrivacySettings,
+}
+
+type SettingsKey = keyof SettingsMap;
+
+
 interface GeneralSettings{
   username: string,
   email: string,
@@ -8,18 +17,20 @@ interface GeneralSettings{
   country: string,
 }
 
-const general = ref<GeneralSettings>( //transformed into IIFE
-  (()=>{
-    const stored = localStorage.getItem('general');
+const init = <T extends SettingsKey>(key:T, defaults:SettingsMap[T]) =>{
+  const stored = localStorage.getItem(key);
 
-    return stored !== null? JSON.parse(stored):{
+  return stored !== null? JSON.parse(stored):defaults;
+};
+
+const general = ref<GeneralSettings>( //transformed into IIFE
+    init("general", {
       username: '',
       email: '',
       about: '',
       gender: 'male',
       country: 'USA',
-    };
-  })()
+    })
 );
 
 watch(general, (value)=> localStorage.setItem('general', JSON.stringify(value)), {deep: true});
@@ -29,10 +40,12 @@ interface NotificationsSettings{
   sms: boolean,
 }
 
-const notifications = ref<NotificationsSettings>({
-  email:false,
-  sms:false,
-});
+const notifications = ref<NotificationsSettings>(
+  init('notifications', {
+    email:false,
+    sms:false,
+  })
+);
 
 
 type Visibility ='public'|'private';
@@ -42,10 +55,12 @@ interface PrivacySettings{
   searchEngineIndexing: boolean,
 }
 
-const privacy = ref<PrivacySettings>({
-  visibility:'public',
-  searchEngineIndexing:true,
-})
+const privacy = ref<PrivacySettings>(
+  init('privacy',{
+    visibility:'public',
+    searchEngineIndexing:true,
+  })
+);
 
 
 export function useSettings(){
