@@ -1,6 +1,6 @@
 <template>
   <Teleport to="body">
-    <ol>
+    <ol class="notification-list">
       <li v-for="notification in notifications" :key="notification.id" class="notification-item">
         <div class="text-sm font-semibold">
           {{ notification.message }}

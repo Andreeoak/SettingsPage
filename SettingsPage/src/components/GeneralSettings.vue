@@ -3,7 +3,7 @@
     <h2 class="text-2xl mb-4">
     General
   </h2>
-    <form class="space-y-4 mx-auto">
+    <form class="space-y-4 mx-auto" @submit.prevent="save">
       <div>
         <label>
           Username
@@ -55,6 +55,12 @@
 
 <script lang="ts" setup>
 import { useSettings } from '@/composables/useSettings';
+import { useNotifications } from '@/composables/useNotifications';
 
+const {addNotifications} = useNotifications();
 const{general} = useSettings();
+
+const save = ()=>{
+  addNotifications('General settings were changed successfully!')
+}
 </script>
