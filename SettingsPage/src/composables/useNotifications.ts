@@ -25,7 +25,9 @@ const addNotifications = (message:string)=>{
 
 export function useNotifications(){
   return {
-    notifications
+    notifications,
+    removeNotification,
+    addNotifications,
   };
 }
 
